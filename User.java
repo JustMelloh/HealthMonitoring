@@ -136,4 +136,15 @@ public class User {
     public void setDoctor(boolean doctor) {
         isDoctor = doctor;
     }
+
+    
+    @Override
+    public String toString() {
+        return "User{" +
+            "firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", email='" + email + '\'' +
+            // include other fields if desired...
+            '}';
+    }
 }

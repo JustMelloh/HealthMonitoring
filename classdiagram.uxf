@@ -1,0 +1,36 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>460</x><y>210</y><w>210</w><h>190</h></coordinates><panel_attributes>UserDao
+
+
+--
+connection: Connection
+--
+creatingUser(User)
+getUserById(int)
+getUserByEmail(String)
+updateUser(User)
+deleteUser(int)
+passwordVerification()
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>790</x><y>230</y><w>210</w><h>170</h></coordinates><panel_attributes>User
+--
+id: int
+firstName: String
+lastName: String
+email: String
+password: String
+isDoctor:boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1050</x><y>230</y><w>210</w><h>70</h></coordinates><panel_attributes>Doctor
+--
+medicalLicenseNumber: String
+specialization: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>710</x><y>520</y><w>360</w><h>250</h></coordinates><panel_attributes>DoctorPortalDao
+--
+getDoctorById(int id): Doctor
+getPatientsByDoctorId() : List
+getHealthDataByPatientId() List
+isDoctorValidId(int doctorId) : boolean
+addDoctortoPatient(int doctorId, int patientId) : boolean
+removePatientFromDoctor(int doctorId, int patientId) : boolean
+getDoctorReminders(int doctorId) : List
+getDueReminders(List&lt;MedicineReminder&gt; dueReminders2) : List
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>880</x><y>420</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element></diagram>

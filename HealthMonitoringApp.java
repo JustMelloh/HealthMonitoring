@@ -321,7 +321,7 @@ public class HealthMonitoringApp {
         int userId = loggedUser.getId();
         MedicineReminder reminder = new MedicineReminder(userId, medicineName, dosage, schedule, formattedStartDate, formattedEndDate);
 
-        reminderDao.addReminder(reminder);
+        reminderDao.addReminder(reminder, userId);
 
     }
 
@@ -387,7 +387,7 @@ public class HealthMonitoringApp {
      * @throws InputMismatchException if the user enters an invalid input for the menu selection.
      */
     public static void DoctorPortal() {
-        // Replace the doctorId with a valid ID from your database
+        
         int doctorId = loggedUser.getId();
         if (doctorPortalDao.isDoctorIdValid(doctorId)) {
             System.out.println("Doctor ID is valid.");
@@ -434,7 +434,7 @@ public class HealthMonitoringApp {
                     break;
                 case 4:
                     if (doctorPortalDao.isDoctorIdValid(doctorId)) {
-                        addMedicineReminder();
+                        assignMedicineReminderToPatient();
                     } else {
                         System.out.println("Only doctors can add medicine reminders.");
                     }
@@ -623,6 +623,49 @@ public class HealthMonitoringApp {
                 System.out.println(reminder);
             }
         }
+    }
+
+    /* Allow a doctor to select a patient within the Doctor Portal to add medicine to */
+
+    public static void assignMedicineReminderToPatient() {
+    
+    
+        System.out.println("-- Medicine Reminder Entry --");
+
+        System.out.println("Enter the ID of the patient to assign a medicine reminder: ");
+        int userId = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter medicine name: ");
+        String medicineName = scanner.nextLine();
+
+        System.out.print("Enter dosage in MG: ");
+        String dosage = scanner.nextLine();
+
+        System.out.println("Enter schedule (e.g., 2 times a day): ");
+        String schedule = scanner.nextLine();
+
+        System.out.print("Enter start date (dd-mm-yyyy): ");
+        String startDate = scanner.nextLine();
+
+        System.out.print("Enter end date (dd-mm-yyyy): ");
+        String endDate = scanner.nextLine();
+
+        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        LocalDate date = LocalDate.parse(startDate, inputFormat);
+        String formattedStartDate = outputFormat.format(date);
+
+        date = LocalDate.parse(endDate, inputFormat);
+        String formattedEndDate = outputFormat.format(date);
+
+    
+        
+        MedicineReminder reminder = new MedicineReminder(userId, medicineName, dosage, schedule, formattedStartDate, formattedEndDate);
+    
+        MedicineReminderManager reminderManager = new MedicineReminderManager();
+        reminderManager.addReminder(reminder, userId);
     }
     
 }

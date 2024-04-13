@@ -227,6 +227,7 @@ public class DoctorPortalDao {
             return false;
         }
     }
+    
 
     /**
      * Retrieves a list of medicine reminders for a specific doctor.
@@ -258,7 +259,7 @@ public class DoctorPortalDao {
             e.printStackTrace();
         }
 
-        return doctorReminders; // Add return statement
+        return doctorReminders;
     }
 
     /**
